@@ -17,29 +17,77 @@ const binarySearch = (array, target) => {
 	//if arr[i] === target, break
 	//then return true, else return false?
 
+
 	const center = array.length / 2;
 	let left = array.slice(0, center);
 	let right = array.slice(center);
 	let root = right[0];
-	if (target === root) {
-		return true;
-	}
+
+	//base case for left
+	if(array.length === 1) return array[0] === target;
+	//base case for right
+	if (target === root)return true;
+
+	//O(log n)
+	if (target > root) return binarySearch(right, target)
+	  //go left
+	else if  (target < root) return binarySearch(left, target);
+
+
+
+};
+
+
+	/* OUR Working Code O(n)
+
 	console.log('TARGET', target)
+
 	if (target > root) {  //go right
 		for (let i = 0; i < right.length; i++) {
-			if (right[i] === target) {
-				return true;
-			} 
-		}
-	} else {  // go left
-		for (let i = left.length-1; i >= 0; i--) {
-			if (left[i] === target) {		
-				return true;
-			} 
+			if (right[i] === target) return true;
 		}
 	}
+
+	// go left
+	for (let i = left.length-1; i >= 0; i--) {
+		if (left[i] === target) return true;
+	}
 	return false
-};
+}
+return false
+}
+	*/
+
+	//if the target is > root, we right
+		//recursion:
+			// first arr = [11, 12, 15, 17, 18, 19, 20]
+			//left = [11, 12, 15]
+			//right = [17, 18, 19, 20]
+			//root = 17
+			//if 17 === 20 return true
+			//if 20 > 17 repeat recursion
+				// second binary search ( [17, 18, 19, 20] )
+					//left  = [17, 18]
+					//right = [19, 20]
+					//if 20 > 19
+						// binarysearch( [19, 20])
+						//left [19]
+						//right is 20
+						//root is 20
+						//if 20 === 20 return true
+
+		//go right
+// 		if (target > root) return binarySearch(right, target)
+
+// 	  //go left
+// 		else if  (target < root) return binarySearch(left, target);
+
+
+
+// 	return false
+
+
+// };
 
 /*
 	EXTRA CREDIT:
